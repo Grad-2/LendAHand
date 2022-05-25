@@ -1,10 +1,14 @@
 mod config;
+mod handlers;
+
+use crate::config::Config;
+use handlers::app_config;
 
 use color_eyre::Result;
 use actix_web::{App, HttpServer, middleware::Logger};
 use tracing::info;
 
-use crate::config::Config;
+
 
 
 
@@ -19,6 +23,7 @@ async fn main() -> Result<()>{
 	HttpServer::new(move || {
 		App::new()
 			.wrap(Logger::default())
+			.configure(app_config)
 	})
 	.bind(format!("{}:{}",config.host, config.port))?
 	.run()
