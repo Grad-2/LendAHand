@@ -1,4 +1,11 @@
+
+#backend
 /backend/api/target/
 /backend/api/.env.docker
 /backend/internal_api/target
+
+
+#microservics - auth
+microservices/Auth/lend_an_auth/target
+# main env
 .env
