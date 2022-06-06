@@ -21,8 +21,7 @@ services:
       - .env
     depends_on:
       - db
-    profiles:
-      - backend
+
   frontend:
     container_name: react
     build: ./frontend
@@ -33,18 +32,15 @@ services:
       - "${FRONTEND_PORT}"
     depends_on:
       - api
-      - chat
-    profiles:
-      - backend
 
-  chat:
-    container_name: chat
-    build:
-      context: ./backend/messaging
-      dockerfile: Dockerfile
+  messaging:
+    container_name: messaging
+    build: ./backend/messaging
     ports:
-      - '${CHAT_PORT}:${CHAT_PORT}'
-    restart: unless-stopped
+      - '${MSG_PORT}:${MSG_PORT}'
+    expose:
+      - "${MSG_PORT}"
+    restart: always
     env_file:
       - .env
     depends_on: 

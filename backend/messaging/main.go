@@ -66,5 +66,5 @@ func main() {
 		c.JSON(200, msgs)
 	})
 
-	router.Run(fmt.Sprintf(":%s", os.Getenv("CHAT_PORT")))
+	router.Run(fmt.Sprintf(":%s", os.Getenv("MSG_PORT")))
 }
