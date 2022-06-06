@@ -10,6 +10,7 @@ export const ROUTER_PATHS = {
 	login: '/login',
 	profile: '/profile',
 	createUser: '/create-user',
+	chat: '/chat',
 	error: '*'
 }
 
@@ -53,6 +54,11 @@ export const REQUEST = {
 export const PROFILE = {
 	welcome: 'Welcome the Profile Page!',
 	subtitle: 'This is probably a Strectch Goal.'
+}
+
+export const CHAT = {
+	welcome: 'Welcome the Chat Page!',
+	subtitle: 'This might work...'
 }
 
 export const LOGIN = {

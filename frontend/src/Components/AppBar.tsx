@@ -38,6 +38,10 @@ const AppBar = (props: AppBarProps) => {
 		navigation(ROUTER_PATHS.profile);
 	}
 
+	const onClickChat = () => {
+		navigation(ROUTER_PATHS.chat);
+	}
+
 	const onClickLogin = () => {
 		navigation(ROUTER_PATHS.login);
 	}

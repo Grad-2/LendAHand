@@ -7,13 +7,14 @@ import LendPage from './Components/LendPage';
 import RequestPage from './Components/RequestPage';
 import LoginPage from './Components/LoginPage';
 import ProfilePage from './Components/ProfilePage';
+import ChatPage from './Components/ChatPage';
 import { AppUser, ROUTER_PATHS } from './Constants';
 import "../public/lendahand.css";
 import { useEffect, useState } from 'react';
 import { testBackendConnection, testBackendStatus } from './services/BackendStatusService';
+import { testChatConnection, testChatStatus } from './services/ChatStatusService';
 import CreateLendPage from './Components/CreateLendPage';
 import CreateUserPage from './Components/CreateUserPage';
-
 
 
 
@@ -39,6 +40,8 @@ function App() {
 		console.log("AppBar first Render")
 		testBackendConnection()
 		testBackendStatus()
+		testChatConnection()
+		testChatStatus()
 	},[])
 
 
@@ -59,6 +62,7 @@ function App() {
 	const loginPage = <LoginPage loginUser={loginUser} userState={userState}/>
 	const createUserPage = <CreateUserPage/>
 	const profilePage = <ProfilePage/>
+	const chatPage = <ChatPage/>
 
   return (
 	
@@ -74,6 +78,7 @@ function App() {
 							<Route path={ROUTER_PATHS.login} element={loginPage}/>
 							<Route path={ROUTER_PATHS.createUser} element={createUserPage}/>
 							<Route path={ROUTER_PATHS.profile} element={profilePage}/>
+							<Route path={ROUTER_PATHS.chat} element={chatPage}/>
 
 					</Route>
 
