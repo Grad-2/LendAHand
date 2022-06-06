@@ -5,6 +5,16 @@ from backend.app import app
 
 from markupsafe import escape
 
+@app.route("/status")
+def status():
+	redis_active = utils.redis_client.ping()
+	flask_active = True
+	status = {"flask_active": flask_active, "redis_active": redis_active}
+	if flask_active and redis_active:
+		return jsonify(status), 200
+	else:
+		return jsonify(status), 400
+
 @app.route("/stream")
 def stream():
     return Response(utils.event_stream(), mimetype="text/event-stream"), 200
