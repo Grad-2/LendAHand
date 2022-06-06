@@ -8,7 +8,7 @@ services:
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     env_file:
-      - ./backend/api/.env.docker
+      - .env
   api:
     container_name: api
     build: ./backend/api
@@ -34,22 +34,18 @@ services:
     depends_on:
       - api
       - chat
+    profiles:
+      - backend
 
   chat:
     container_name: chat
     build:
-      context: ./chat-service 
+      context: ./backend/messaging
       dockerfile: Dockerfile
     ports:
       - '${CHAT_PORT}:${CHAT_PORT}'
     restart: unless-stopped
+    env_file:
+      - .env
     depends_on: 
-      - redis 
-    environment:
-      REDIS_HOST: redis
-      REDIS_PORT: "${REDIS_PORT}"    
-   
-  redis:
-    container_name: redis
-    image: "redis:latest"
-    restart: unless-stopped
+      - db   

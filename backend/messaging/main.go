@@ -32,16 +32,6 @@ func main() {
 		c.JSON(200, msg)
 	})
 
-	msg.GET("user/:sid/to/:rid", func(c *gin.Context) {
-		sid, serr := strconv.Atoi(c.Param("sid"))
-		rid, rerr := strconv.Atoi(c.Param("rid"))
-		if serr != nil || rerr != nil {
-			c.JSON(400, gin.H{"status": "bad request"})
-		}
-		msgs := message.GetUserMessages(&db, sid, rid)
-		c.JSON(200, msgs)
-	})
-
 	msg.GET(":id", func(c *gin.Context) {
 		id, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
@@ -64,6 +54,16 @@ func main() {
 		} else {
 			c.JSON(400, gin.H{"status": "bad request"})
 		}
+	})
+
+	router.GET("/chat/:sid/:rid", func(c *gin.Context) {
+		sid, serr := strconv.Atoi(c.Param("sid"))
+		rid, rerr := strconv.Atoi(c.Param("rid"))
+		if serr != nil || rerr != nil {
+			c.JSON(400, gin.H{"status": "bad request"})
+		}
+		msgs := message.GetUserMessages(&db, sid, rid)
+		c.JSON(200, msgs)
 	})
 
 	router.Run(fmt.Sprintf(":%s", os.Getenv("CHAT_PORT")))
