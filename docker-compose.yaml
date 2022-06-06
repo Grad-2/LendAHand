@@ -21,6 +21,8 @@ services:
       - .env
     depends_on:
       - db
+    profiles:
+      - backend
   frontend:
     container_name: react
     build: ./frontend
