@@ -1,0 +1,68 @@
+version: "3.1"
+services:
+  db:
+    container_name: lah_db
+    image: postgres
+    volumes:
+      - /var/lib/postgresql/data/
+    ports:
+      - '${POSTGRES_PORT}:${POSTGRES_PORT}'
+    env_file:
+      - ./backend/api/.env.docker
+  api:
+    container_name: api
+    build: ./backend/api
+    restart: always
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    expose: 
+      - "${BACKEND_PORT}"
+    env_file:
+      - .env
+    depends_on:
+      - db
+  frontend:
+    container_name: react
+    build: ./frontend
+    restart: always
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+    expose:
+      - "${FRONTEND_PORT}"
+    depends_on:
+      - api
+      - chat
+
+  chat:
+    container_name: chat
+    build:
+      context: ./chat-service 
+      dockerfile: Dockerfile
+    ports:
+      - '${CHAT_PORT}:${CHAT_PORT}'
+    restart: unless-stopped
+    depends_on: 
+      - redis 
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: "${REDIS_PORT}"    
+   
+  redis:
+    container_name: redis
+    image: "redis:latest"
+    restart: unless-stopped
+
+  nginx:
+      container_name: nginx
+      image: nginx:1.19.2-alpine
+      hostname: nginx
+      volumes:
+          - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      ports:
+
+      depends_on:
+          - redis
+
+volumes:
+  postgres_data:
+  redis_data:

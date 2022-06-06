@@ -51,3 +51,18 @@ services:
     container_name: redis
     image: "redis:latest"
     restart: unless-stopped
+
+  nginx:
+      container_name: nginx
+      image: nginx:1.19.2-alpine
+      hostname: nginx
+      volumes:
+          - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      ports:
+
+      depends_on:
+          - redis
+
+volumes:
+  postgres_data:
+  redis_data:
