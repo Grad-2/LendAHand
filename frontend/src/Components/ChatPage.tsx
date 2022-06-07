@@ -1,9 +1,22 @@
 import { Typography, Box, Paper } from "@mui/material";
 import { CHAT } from '../Constants'
+// import { Router, Switch, Route } from "react-router-dom"
+// import ChatRoom from './chat-helpers/ChatRoom';
+import JoinPMRoom from './chat-helpers/JoinPMRoom';
+import useChat from './chat-helpers/useChat';
 import { ChatMock } from '../MockChatData'
 
+//Join PM Room
+
+//Chat Room
+	//Output
+	//Input
+
+//Chat handlers
+	//useChat
 
 const ChatPage = () => {
+
 	return(
 		<>
 			<Box mt={15} display='flex' justifyContent='center'>
