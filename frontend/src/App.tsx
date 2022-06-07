@@ -22,17 +22,19 @@ function App() {
 
 	let[userState, setUserState] = useState(AppUser.userLoggedOut)
 
-	const loginUser = (id: number) => {
+	const loginUser = (id: number, username: string) => {
 		setUserState({
 			id: id, 
-			loggedIn: true
+			loggedIn: true,
+			username: username
 		})
 	}
 
 	const logoutUser = () => {
 		setUserState({
 			id: -1,
-			loggedIn: false
+			loggedIn: false,
+			username: ''
 		})
 	}
 
@@ -62,7 +64,7 @@ function App() {
 	const loginPage = <LoginPage loginUser={loginUser} userState={userState}/>
 	const createUserPage = <CreateUserPage/>
 	const profilePage = <ProfilePage/>
-	const chatPage = <ChatPage/>
+	const chatPage = <ChatPage loginUser={loginUser} userState={userState}/>
 
   return (
 	

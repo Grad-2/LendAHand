@@ -101,6 +101,11 @@ const AppBar = (props: AppBarProps) => {
 										{APPBAR.PROFILE}
 									</Typography>
 								</Button>
+								<Button sx={rightButtonsSX} size='medium' variant='contained' color='info' onClick = {onClickChat}>
+									<Typography variant="subtitle1" color='white'>
+										{APPBAR.CHAT}
+									</Typography>
+								</Button>
 								<Button sx={rightButtonsSX} size='medium' variant='contained' color='info' onClick={onClickLogout}>
 									<Typography variant="subtitle1" color='white'>
 											Logout

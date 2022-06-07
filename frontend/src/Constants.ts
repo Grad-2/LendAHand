@@ -22,7 +22,7 @@ export const E404 = {
 
 
 
-const loggedOut: logState = {id: -1, loggedIn: false}
+const loggedOut: logState = {id: -1, loggedIn: false, username: ''}
 export const AppUser = {
 	userLoggedOut: loggedOut
 }
@@ -32,7 +32,8 @@ export const APPBAR = {
 	LEND: 'Lend',
 	REQUEST: 'Request',
 	PROFILE: 'Profile',
-	LOGIN: 'Login'
+	LOGIN: 'Login',
+	CHAT: 'Chat',
 }
 
 

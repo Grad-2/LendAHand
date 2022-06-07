@@ -15,5 +15,6 @@ export interface ItemType  {
 
 export interface logState {
 	id: number, 
-	loggedIn: boolean
+	loggedIn: boolean,
+	username: string
 }

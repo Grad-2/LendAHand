@@ -28,7 +28,7 @@ const errorStateTrue: errorState = {
 
 
 interface LoginProps {
-	loginUser: (id: number) => void,
+	loginUser: (id: number, username: string) => void,
 	userState: logState
 }
 
@@ -96,8 +96,8 @@ const LoginPage = (props: LoginProps) => {
 				console.log("User logged in as: ",res.data);
 				console.log("User id: ",res.data.id)
 			
-				props.loginUser(res.data.id)
-				
+				props.loginUser(res.data.id, res.data.username)
+		
 			})
 			.catch(e => {
 				setSubmitted(false);

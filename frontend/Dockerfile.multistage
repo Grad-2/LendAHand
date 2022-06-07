@@ -1,0 +1,26 @@
+# install modules
+FROM node:13.10.1-alpine as module-install-stage
+
+WORKDIR /frontend
+
+ENV PATH /frontend/node_modules/.bin:$PATH
+
+COPY package.json ./
+
+RUN npm ci --production
+
+# build
+FROM node:13.10.1-alpine as build-stage
+COPY --from=module-install-stage /frontend/node_modules/ /frontend/node_modules
+
+WORKDIR /frontend
+
+COPY . ./
+
+# deploy 
+FROM node:13.10.1-alpine as deploy-stage
+COPY --from=build-stage /frontend/build/ /frontend/build
+
+RUN npm install react-app-rewired -g
+
+CMD ["npm", "start"]

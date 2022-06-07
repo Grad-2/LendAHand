@@ -5,7 +5,10 @@ import { CHAT } from '../Constants'
 import JoinPMRoom from './chat-helpers/JoinPMRoom';
 import useChat from './chat-helpers/useChat';
 import { ChatMock } from '../MockChatData'
-
+import { useEffect, useState } from 'react';
+import { logState, UserType } from "../Types/types";
+import { Widget, addResponseMessage } from "react-chat-widget";
+import 'react-chat-widget/lib/styles.css';
 //Join PM Room
 
 //Chat Room
@@ -14,8 +17,23 @@ import { ChatMock } from '../MockChatData'
 
 //Chat handlers
 	//useChat
+interface LoginProps {
+	loginUser: (id: number, username: string) => void
+	userState: logState
+}
 
-const ChatPage = () => {
+const ChatPage = (props: LoginProps) => {
+
+	useEffect(() => {
+		addResponseMessage('You can direct message lenders and borrowers here !');
+		console.log('user: ' + props.loginUser);
+		console.log('state: ' + props.userState);
+	  }, [props.loginUser, props.userState]);
+
+	const handleNewUserMessage = (newMessage: any) => {
+		console.log(`New message - ${newMessage}`);
+		//send via socket to backend
+	};
 
 	return(
 		<>
@@ -23,6 +41,17 @@ const ChatPage = () => {
 				<Typography variant='h3'>
 					{CHAT.welcome}
 				</Typography>
+			</Box>
+
+			<Box mt={15} display='flex' justifyContent='center'>
+				<Typography variant='h3'>
+					Private Message
+				</Typography>
+				<Widget 
+					handleNewUserMessage={handleNewUserMessage}
+					title="Private Message"
+					subtitle="Chat"
+				/>
 			</Box>
 
 			<Box mt={5} display='flex' justifyContent='center'>
