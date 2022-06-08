@@ -6,7 +6,7 @@ services:
     volumes:
       - /var/lib/postgresql/data/
     ports:
-      - '${POSTGRES_PORT}:${POSTGRES_PORT}'
+      - '${{ secrets.POSTGRES_PORT }}:${{ secrets.POSTGRES_PORT }}'
     env_file:
       - ./backend/api/.env.docker
   api:
@@ -14,9 +14,9 @@ services:
     build: ./backend/api
     restart: always
     ports:
-      - "${BACKEND_PORT}:${BACKEND_PORT}"
+      - "${{ secrets.BACKEND_PORT}}:${{ BACKEND_PORT }}"
     expose: 
-      - "${BACKEND_PORT}"
+      - "${{ secrets.BACKEND_PORT }}"
     env_file:
       - .env
     depends_on:
@@ -26,9 +26,9 @@ services:
     build: ./frontend
     restart: always
     ports:
-      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+      - "${{ secrets.FRONTEND_PORT }}:${ secrets.FRONTEND_PORT }}"
     expose:
-      - "${FRONTEND_PORT}"
+      - "${{ secrets.FRONTEND_PORT }}"
     depends_on:
       - api
       - chat
@@ -39,13 +39,13 @@ services:
       context: ./chat-service 
       dockerfile: Dockerfile
     ports:
-      - '${CHAT_PORT}:${CHAT_PORT}'
+      - '${{ secrets.CHAT_PORT }}:${{ secrets.CHAT_PORT }}'
     restart: unless-stopped
     depends_on: 
       - redis 
     environment:
       REDIS_HOST: redis
-      REDIS_PORT: "${REDIS_PORT}"    
+      REDIS_PORT: "${{ secrets.REDIS_PORT }}"    
    
   redis:
     container_name: redis
