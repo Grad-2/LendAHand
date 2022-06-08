@@ -85,7 +85,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            cd /app/LendAHand            
+            cd /app/LendAHand
             docker-compose -f /app/LendAHand/docker-compose.yml down
             docker system prune -af
             rm -rf ./*
@@ -120,6 +120,7 @@ jobs:
           port: 22
           script: |
             cd /app/LendAHand
+            doctl auth init --access-token "${{ secrets.DO_ACCESS_TOKEN }}"
             doctl registry login
             mv docker-compose.prod.yml docker-compose.yml
             sudo docker-compose up -d --build
