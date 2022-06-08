@@ -7,8 +7,8 @@ services:
       - /var/lib/postgresql/data/
     ports:
       - '5432:5432'
-    env_file:
-      - ./backend/api/.env.docker
+    # env_file:
+    #   - ./backend/api/.env.docker
   api:
     container_name: api
     build: ./backend/api
@@ -17,8 +17,8 @@ services:
       - "9000:9000"
     expose: 
       - "9000"
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     depends_on:
       - db
   frontend:
@@ -57,12 +57,12 @@ services:
       image: nginx:1.19.2-alpine
       hostname: nginx
       volumes:
-          - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        - ./nginx.conf:/etc/nginx/nginx.conf:ro
       ports:
-          -"8000:8000"
-          -"80001:8001"
+        - "8000:8000"
+        - "80001:8001"
       depends_on:
-          - redis
+        - redis
 
 volumes:
   postgres_data:
