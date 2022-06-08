@@ -1,12 +1,12 @@
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-const ChatService = axios.create({
-  baseURL: "http://localhost:8080",
-  headers: {
-    "Content-type": "application/json"
-  }
-});
+// const ChatService = axios.create({
+//   baseURL: "http://localhost:8080",
+//   headers: {
+//     "Content-Type": "application/json"
+//   }
+// });
 
 const BASE_URL = 'http://localhost:8080';
 export const MESSAGES_TO_LOAD = 10;
@@ -49,4 +49,4 @@ export const getRooms = async (userId) => {
   return axios.get(url(`/rooms/${userId}`)).then(x => x.data);
 }
 
-export default ChatService;
+// export default ChatService;

@@ -1,4 +1,14 @@
-import ChatService from "./HttpChatService";
+// import ChatService from "./HttpChatService";
+import axios from "axios";
+axios.defaults.withCredentials = true;
+
+const ChatService = axios.create({
+  baseURL: "http://localhost:8080",
+  headers: {
+    "Content-Type": "application/json",
+	"withCredentials": true
+  }
+});
 
 export async function testChatStatus() {
 	console.log(">>>>> Attempting to check chat status.")

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import  socketIOClient from "socket.io-client";
-import HttpChatService from '../../services/HttpChatService'
+import HttpChatService from '../../services/Axios-api'
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
 const SOCKET_SERVER_URL = "http://localhost:8080";

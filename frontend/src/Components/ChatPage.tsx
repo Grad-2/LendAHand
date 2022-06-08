@@ -10,6 +10,7 @@ import { logState, UserType } from "../Types/types";
 import { Widget, addResponseMessage } from "react-chat-widget";
 import 'react-chat-widget/lib/styles.css';
 import ChatRoom from './chat-helpers/ChatRoom';
+import { Link } from "react-router-dom";
 
 //Join PM Room
 
@@ -28,6 +29,12 @@ const ChatPage = (props: LoginProps) => {
 	const userId = props.userState.id;
 	const username = props.userState.username;
 
+	const [roomName, setRoomName] = useState("");
+
+	const handleRoomNameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+		setRoomName(event.target.value);
+	};
+	
 	useEffect(() => {
 		addResponseMessage('You can direct message lenders and borrowers here !');
 		console.log('username: ', username);
@@ -45,8 +52,21 @@ const ChatPage = (props: LoginProps) => {
 				<Typography variant='h3'>
 					{CHAT.welcome}
 				</Typography>
-				<ChatRoom/>
+				{/* <ChatRoom loginUser={props.loginUser} userState={props.userState}/> */}
 			</Box>
+
+			<div className="home-container">
+				<input
+					type="text"
+					placeholder="Room"
+					value={roomName}
+					onChange={handleRoomNameChange}
+					className="text-input-field"
+				/>
+				<Link to={'/chat-room'} className="enter-room-button">
+					Private Message
+				</Link>
+			</div>
 
 			<Box mt={15} display='flex' justifyContent='center'>
 				<Typography variant='h3'>
@@ -76,7 +96,6 @@ const ChatPage = (props: LoginProps) => {
 		</>
 	);
 }
-
 
 
 export default ChatPage;

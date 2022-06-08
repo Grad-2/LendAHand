@@ -1,4 +1,5 @@
 from flask import Response, jsonify, request, session
+from flask_cors import cross_origin
 
 from backend import utils
 from backend.app import app
@@ -6,6 +7,7 @@ from backend.app import app
 from markupsafe import escape
 
 @app.route("/status")
+@cross_origin()
 def status():
 	redis_active = utils.redis_client.ping()
 	flask_active = True
@@ -16,10 +18,12 @@ def status():
 		return jsonify(status), 400
 
 @app.route("/stream")
+@cross_origin()
 def stream():
     return Response(utils.event_stream(), mimetype="text/event-stream"), 200
 
-@app.route("/me")						
+@app.route("/me")
+@cross_origin()						
 def get_my_session():
     user = session.get("user", None)
     if user:
@@ -29,16 +33,19 @@ def get_my_session():
 
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
+@cross_origin()
 def catch_all(path):
     # not sure if this needs to return react component on the frontend
     return f"You have connected to the chat-service backend!!! You are trying to access {path}:{path}", 200
     # return app.send_static_file("index.html")
 
 @app.route("/help")
+@cross_origin()
 def index():
 	return "This is the backend for the chat-service. Try '/users', '/rooms/<user_id>', and '/room/<room_id>/messages'", 200
 
 @app.route("/login", methods=["POST"])
+@cross_origin()
 def login():
     data = request.get_json()
     username = data["username"]
@@ -62,6 +69,7 @@ def login():
 
 ### maybe automatically call this whenever a new login occurs on frontend? ###
 @app.route("/logout", methods=["POST"])
+@cross_origin()
 def logout():
 	user = session.get("user", None)
 	print(user)
@@ -74,6 +82,7 @@ def logout():
 		return jsonify({"message": f"User {user_id} has been logged out"}), 200
 
 @app.route("/users")
+@cross_origin()
 def get_user_info_from_ids():
 	# This will return a JSON of all the users stored in redis
 	# uses params ids[] as list (e.g. '/users?ids[]=[1,2,3])
@@ -91,7 +100,8 @@ def get_user_info_from_ids():
 		return jsonify(users), 200
 	return jsonify(None), 404
 
-@app.route("/users/online")			
+@app.route("/users/online")	
+@cross_origin()		
 def get_online_users():
     # This returns a JSON of all users currently online
     online_ids = map(
@@ -109,15 +119,17 @@ def get_online_users():
         return jsonify(None), 404
     return jsonify(users), 200
 
-@app.rout("/room", methods=["POST"])
+@app.route("/room", methods=["POST"])
+@cross_origin()
 def add_room():
     id1 = request.args.get('user1')
     id2 = request.args.get('user2')
     if type(id1) != int or type(id2) != int:
         return jsonify(None), 404
-    return utils.create_private_room(id1, id2)
+    return utils.create_private_room(id1, id2), 200
 
 @app.route("/rooms/<string:user_id>")
+@cross_origin()
 def get_rooms_for_user_id(user_id=0):
     # This will return a JSON of the private rooms a user-id belongs to - each room represents a separate direct message with another user
 	if not user_id:
@@ -158,6 +170,7 @@ def get_rooms_for_user_id(user_id=0):
 	return jsonify(rooms), 200
 
 @app.route("/room/<string:room_id>/messages")
+@cross_origin()
 def get_messages_for_selected_room(room_id="0"):
     # This will return a JSON of all the messages in a specific room_id e.g. between two users 1 and 2 from "room_id":"1:2"
 	offset = request.args.get("offset")

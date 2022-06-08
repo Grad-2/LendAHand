@@ -16,6 +16,7 @@ import { testChatConnection, testChatStatus } from './services/ChatStatusService
 import CreateLendPage from './Components/CreateLendPage';
 import CreateUserPage from './Components/CreateUserPage';
 import useAppStateContext, { AppContext } from './state';
+import ChatRoom from './Components/chat-helpers/ChatRoom';
 
 
 function App(this: any) {
@@ -69,6 +70,7 @@ function App(this: any) {
 	const createUserPage = <CreateUserPage/>
 	const profilePage = <ProfilePage/>
 	const chatPage = <ChatPage loginUser={loginUser} userState={userState}/>
+	const chatRoom = <ChatRoom loginUser={loginUser} userState={userState}/>
 
   return (
 	
@@ -85,6 +87,7 @@ function App(this: any) {
 							<Route path={ROUTER_PATHS.createUser} element={createUserPage}/>
 							<Route path={ROUTER_PATHS.profile} element={profilePage}/>
 							<Route path={ROUTER_PATHS.chat} element={chatPage}/>
+							<Route path={ROUTER_PATHS.chatRoom} element={chatRoom}/>
 
 					</Route>
 
