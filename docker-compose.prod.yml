@@ -9,6 +9,7 @@ services:
       - '5432:5432'
   api:
     container_name: api
+    image: registry.digitalocean.com/lend-a-hand/backend
     # build: ./backend/api
     restart: always
     ports:
@@ -19,6 +20,7 @@ services:
       - db
   frontend:
     container_name: react
+    image: registry.digitalocean.com/lend-a-hand/frontend
     # build: ./frontend
     restart: always
     ports:
