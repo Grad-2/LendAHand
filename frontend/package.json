@@ -52,8 +52,7 @@
   "homepage": "https://github.com/Grad-2/LendAHand",
   "devDependencies": {
     "customize-cra": "^1.0.0",
-    "react-app-rewire-appcache-plugin": "^1.0.5",
-    "react-app-rewired": "^2.2.1",
-    "react-chat-widget": "^3.1.4"
+    "react-app-rewire-appcache-plugin": "^1.0.1",
+    "react-app-rewired": "^2.2.1"
   }
 }

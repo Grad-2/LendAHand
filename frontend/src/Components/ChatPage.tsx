@@ -7,8 +7,8 @@ import useChat from './chat-helpers/useChat';
 import { ChatMock } from '../MockChatData'
 import { useEffect, useState } from 'react';
 import { logState, UserType } from "../Types/types";
-import { Widget, addResponseMessage } from "react-chat-widget";
-import 'react-chat-widget/lib/styles.css';
+// import { Widget, addResponseMessage } from "react-chat-widget";
+// import 'react-chat-widget/lib/styles.css';
 import ChatRoom from './chat-helpers/ChatRoom';
 import { Link } from "react-router-dom";
 
@@ -36,7 +36,7 @@ const ChatPage = (props: LoginProps) => {
 	};
 	
 	useEffect(() => {
-		addResponseMessage('You can direct message lenders and borrowers here !');
+		//addResponseMessage('You can direct message lenders and borrowers here !');
 		console.log('username: ', username);
 		console.log('id: ', userId);
 	  }, [userId, username]);
@@ -58,7 +58,7 @@ const ChatPage = (props: LoginProps) => {
 			<div className="home-container">
 				<input
 					type="text"
-					placeholder="Room"
+					placeholder="Private Message Another User"
 					value={roomName}
 					onChange={handleRoomNameChange}
 					className="text-input-field"
@@ -72,11 +72,11 @@ const ChatPage = (props: LoginProps) => {
 				<Typography variant='h3'>
 					Private Message
 				</Typography>
-				<Widget 
+				{/* <Widget 
 					handleNewUserMessage={handleNewUserMessage}
 					title="Private Message"
 					subtitle="Chat"
-				/>
+				/> */}
 			</Box>
 
 			<Box mt={5} display='flex' justifyContent='center'>
