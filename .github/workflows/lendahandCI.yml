@@ -86,8 +86,8 @@ jobs:
           port: 22
           script: |
             cd /app/LendAHand            
-            docker-compose -f /app/LendAHand/docker-compose.yml down 
-            docker system prune -af 
+            docker-compose -f /app/LendAHand/docker-compose.yml down
+            docker system prune -af
             rm -rf ./*
             touch docker_down.txt
 
