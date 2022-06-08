@@ -9,9 +9,9 @@ interface LoginProps {
 }
 
 const ChatRoom = (props: LoginProps) => {
-    const roomIds = props.userState.id;
-    const username = props.userState.username;
-    const { messages, sendMessage } = useChat(roomIds);
+    // const roomIds = props.userState.id;
+    // const username = props.userState.username;
+    // const { messages, sendMessage } = useChat(roomIds);
     const [newMessage, setNewMessage] = React.useState("");
     
     const handleNewMessageChange = function(event: any) {
@@ -23,17 +23,17 @@ const ChatRoom = (props: LoginProps) => {
     };
 
     const handleSendMessage = () => {
-        sendMessage(newMessage);
+        // sendMessage(newMessage);
         setNewMessage("");
     }
 
     return (
         <div className="chat-room-container">
-            <h1 className="room-key">Room Ids: {roomIds}</h1>
-            <h1 className="username">Username: {username}</h1>
+            <h1 className="room-key">Room Ids: </h1>
+            <h1 className="username">Username: </h1>
             <div className="messages-container">
                 <ol className="messages-list">
-                    {messages.map((message, i) => (
+                    {/* {messages.map((message, i) => (
                         <li
                             key={i}
                             className={`message-item` //${
@@ -44,7 +44,7 @@ const ChatRoom = (props: LoginProps) => {
                             if (message)
                                 {message}
                         </li>
-                    ))}
+                    ))} */}
                 </ol>
             </div>
             <textarea

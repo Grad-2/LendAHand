@@ -26,8 +26,8 @@ interface LoginProps {
 }
 
 const ChatPage = (props: LoginProps) => {
-	const userId = props.userState.id;
-	const username = props.userState.username;
+	// const userId = props.userState.id;
+	// const username = props.userState.username;
 
 	const [roomName, setRoomName] = useState("");
 
@@ -35,11 +35,11 @@ const ChatPage = (props: LoginProps) => {
 		setRoomName(event.target.value);
 	};
 	
-	useEffect(() => {
-		//addResponseMessage('You can direct message lenders and borrowers here !');
-		console.log('username: ', username);
-		console.log('id: ', userId);
-	  }, [userId, username]);
+	// useEffect(() => {
+	// 	//addResponseMessage('You can direct message lenders and borrowers here !');
+	// 	console.log('username: ', username);
+	// 	console.log('id: ', userId);
+	//   }, [userId, username]);
 
 	const handleNewUserMessage = (newMessage: any) => {
 		console.log(`New message - ${newMessage}`);

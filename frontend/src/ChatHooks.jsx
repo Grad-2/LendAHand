@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { getMe, login, logOut } from "./api";
+import { getMe, login, logOut } from "./services/Axios-api";
 import io from "socket.io-client";
 import { parseRoomName } from './Components/chat-helpers/use-chat-handlers';
 

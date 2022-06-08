@@ -65,3 +65,4 @@ export default function Chat({ onLogOut, user, onMessageSend }) {
       </div>
     );
   }
+

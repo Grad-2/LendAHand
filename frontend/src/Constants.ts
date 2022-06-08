@@ -12,6 +12,7 @@ export const ROUTER_PATHS = {
 	createUser: '/create-user',
 	chat: '/chat',
 	chatRoom: '/chat-room',
+	chatty: '/chatty',
 	error: '*'
 }
 

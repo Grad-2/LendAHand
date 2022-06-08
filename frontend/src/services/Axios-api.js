@@ -1,14 +1,8 @@
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-// const ChatService = axios.create({
-//   baseURL: "http://localhost:8080",
-//   headers: {
-//     "Content-Type": "application/json"
-//   }
-// });
-
-const BASE_URL = 'http://localhost:8080';
+//use 127.0.0.1 not localhost while testing
+const BASE_URL = 'http://127.0.0.1:8080';
 export const MESSAGES_TO_LOAD = 10;
 const url = x => `${BASE_URL}${x}`;
 
@@ -32,6 +26,19 @@ export const login = (username) => {
 export const logOut = () => {
   return axios.post(url('/logout'));
 }
+
+export const getMessages = (id,
+  offset = 0,
+  size = MESSAGES_TO_LOAD
+) => {
+  return axios.get(url(`/room/${id}/messages`), {
+    params: {
+      offset,
+      size
+    }
+  })
+  .then(x => x.data.reverse());
+};
 
 export const getUsers = (ids) => {
   return axios.get(url(`/room`), { params: { ids } }).then(x => x.data);

@@ -17,9 +17,19 @@ import CreateLendPage from './Components/CreateLendPage';
 import CreateUserPage from './Components/CreateUserPage';
 import useAppStateContext, { AppContext } from './state';
 import ChatRoom from './Components/chat-helpers/ChatRoom';
+import Chat from './Components/chat-helpers/Chat';
+import useAppHandlers from './useAppHandlers';
 
-
-function App(this: any) {
+const App = () => {
+	const {
+		loading,
+		user,
+		state,
+		dispatch,
+		onLogIn,
+		onMessageSend,
+		onLogOut
+	} = useAppHandlers();
 
 	let[userState, setUserState] = useState(AppUser.userLoggedOut)
 
@@ -29,10 +39,6 @@ function App(this: any) {
 			loggedIn: true,
 			username: username
 		})
-		if (username && id) {
-			this.username = username;
-			this.id = id;
-		}
 	}
 
 	const logoutUser = () => {
@@ -71,6 +77,7 @@ function App(this: any) {
 	const profilePage = <ProfilePage/>
 	const chatPage = <ChatPage loginUser={loginUser} userState={userState}/>
 	const chatRoom = <ChatRoom loginUser={loginUser} userState={userState}/>
+	const chatty = <Chat user={user} onMessageSend={onMessageSend} onLogOut={onLogOut}/>
 
   return (
 	
@@ -88,7 +95,7 @@ function App(this: any) {
 							<Route path={ROUTER_PATHS.profile} element={profilePage}/>
 							<Route path={ROUTER_PATHS.chat} element={chatPage}/>
 							<Route path={ROUTER_PATHS.chatRoom} element={chatRoom}/>
-
+							<Route path={ROUTER_PATHS.chatty} element={chatty}/>
 					</Route>
 
 					<Route path={ROUTER_PATHS.error} element={notFound}/>
