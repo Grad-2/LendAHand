@@ -109,6 +109,14 @@ def get_online_users():
         return jsonify(None), 404
     return jsonify(users), 200
 
+@app.rout("/room", methods=["POST"])
+def add_room():
+    id1 = request.args.get('user1')
+    id2 = request.args.get('user2')
+    if type(id1) != int or type(id2) != int:
+        return jsonify(None), 404
+    return utils.create_private_room(id1, id2)
+
 @app.route("/rooms/<string:user_id>")
 def get_rooms_for_user_id(user_id=0):
     # This will return a JSON of the private rooms a user-id belongs to - each room represents a separate direct message with another user
