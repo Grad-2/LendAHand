@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react';
 import { logState, UserType } from "../Types/types";
 import { Widget, addResponseMessage } from "react-chat-widget";
 import 'react-chat-widget/lib/styles.css';
+import ChatRoom from './chat-helpers/ChatRoom';
+
 //Join PM Room
 
 //Chat Room
@@ -18,17 +20,19 @@ import 'react-chat-widget/lib/styles.css';
 //Chat handlers
 	//useChat
 interface LoginProps {
-	loginUser: (id: number, username: string) => void
+	loginUser: (id: number, username: string) => void,
 	userState: logState
 }
 
 const ChatPage = (props: LoginProps) => {
+	const userId = props.userState.id;
+	const username = props.userState.username;
 
 	useEffect(() => {
 		addResponseMessage('You can direct message lenders and borrowers here !');
-		console.log('user: ' + props.loginUser);
-		console.log('state: ' + props.userState);
-	  }, [props.loginUser, props.userState]);
+		console.log('username: ', username);
+		console.log('id: ', userId);
+	  }, [userId, username]);
 
 	const handleNewUserMessage = (newMessage: any) => {
 		console.log(`New message - ${newMessage}`);
@@ -41,6 +45,7 @@ const ChatPage = (props: LoginProps) => {
 				<Typography variant='h3'>
 					{CHAT.welcome}
 				</Typography>
+				<ChatRoom/>
 			</Box>
 
 			<Box mt={15} display='flex' justifyContent='center'>

@@ -15,10 +15,10 @@ import { testBackendConnection, testBackendStatus } from './services/BackendStat
 import { testChatConnection, testChatStatus } from './services/ChatStatusService';
 import CreateLendPage from './Components/CreateLendPage';
 import CreateUserPage from './Components/CreateUserPage';
+import useAppStateContext, { AppContext } from './state';
 
 
-
-function App() {
+function App(this: any) {
 
 	let[userState, setUserState] = useState(AppUser.userLoggedOut)
 
@@ -28,6 +28,10 @@ function App() {
 			loggedIn: true,
 			username: username
 		})
+		if (username && id) {
+			this.username = username;
+			this.id = id;
+		}
 	}
 
 	const logoutUser = () => {

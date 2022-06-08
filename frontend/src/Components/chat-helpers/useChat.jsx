@@ -14,12 +14,12 @@ const useChat = (roomId) => {
             query: { roomId }
         });
 
-        socketRef.current.on(NEW_CHAT_MESAGE_EVENT, (message) => {
+        socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
             const incomingMessage = {
                 ...message,
                 ownedByCurrentUser: message.from === socketRef.current.id
             };
-            setMessages((messages) => [...messages, incomingMessages]);
+            setMessages((messages) => [...messages, incomingMessage]);
         });
 
         return () => {

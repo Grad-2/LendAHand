@@ -6,4 +6,7 @@ export async function getLendItems(){
 	return response
 }
 
-
+export async function postLendItems(item: any){
+	let response = await BackendClient.post('/api/item', item)
+	return response;
+}

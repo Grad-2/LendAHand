@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTER_PATHS } from "../Constants";
 import { ItemType } from "../Types/types";
+import { postLendItems } from "../services/LendService";
+// import useUpdatableState from 'use-updatable-state';
 
 
 const defaultItem: ItemType = {
@@ -25,6 +27,8 @@ const CreateLendPage = () => {
 
 	let [formValues, setFormValues] = useState(defaultFormValues)
 	let [item, setItem] = useState(defaultItem)
+
+	// const [internalState, setInternalState] = useUpdatableState(item, (a,b) => a.id === b.id);
 
 	let [isCreated, setIsCreated] = useState(false)
 	let [title, setTitle] = useState("Create a Lend Item")
@@ -91,6 +95,25 @@ const CreateLendPage = () => {
 				lend_end: endTime
 			})
 			setIsCreated(true)
+
+			const newItem = {
+				name: item.name,
+				img_uri: item.img_uri,
+				lend_start: item.lend_start,
+				lend_end: item.lend_end,
+				owner_id: item.id
+			}
+
+			console.log('Item: ', newItem);
+			postLendItems(newItem).then(res => {
+				console.log("Item has been posted: " + res.data)
+			})
+			.catch((error) => {
+				if (error.response) {
+					console.error(error.response.data);
+				}
+			})
+
 			setTitle("Here is your Lend Item!")
 		}
 	}
