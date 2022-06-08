@@ -96,7 +96,7 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY_SECRET }}
+          key: ${{ secrets.SSH_KEY }}
           port: 22
           source: "nginx.conf"
           target: "/app/LendAHand"
@@ -106,7 +106,7 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY_SECRET }}
+          key: ${{ secrets.SSH_KEY }}
           port: 22
           source: "docker-compose.prod.yml"
           target: "/app/LendAHand"
@@ -116,7 +116,7 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: root
-          key: ${{ secrets.SSH_KEY_SECRET }}
+          key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
             cd /app/LendAHand
