@@ -11,11 +11,12 @@ services:
     #   - ./backend/api/.env.docker
   api:
     container_name: api
+    image: registry.digitalocean.com/lend-a-hand/backend
     build: ./backend/api
     restart: always
     ports:
       - "9000:9000"
-    expose: 
+    expose:
       - "9000"
     # env_file:
     #   - .env
@@ -23,6 +24,7 @@ services:
       - db
   frontend:
     container_name: react
+    image: registry.digitalocean.com/lend-a-hand/frontend
     build: ./frontend
     restart: always
     ports:
@@ -35,18 +37,19 @@ services:
 
   chat:
     container_name: chat
+    image: registry.digitalocean.com/lend-a-hand/chat-service
     build:
-      context: ./chat-service 
+      context: ./chat-service
       dockerfile: Dockerfile
     ports:
       - '8080:8080'
     restart: unless-stopped
-    depends_on: 
-      - redis 
+    depends_on:
+      - redis
     environment:
       REDIS_HOST: redis
-      REDIS_PORT: "6379"    
-   
+      REDIS_PORT: "6379"
+
   redis:
     container_name: redis
     image: "redis:latest"
