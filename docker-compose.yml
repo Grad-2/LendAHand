@@ -7,8 +7,8 @@ services:
       - /var/lib/postgresql/data/
     ports:
       - '5432:5432'
-    env_file:
-      - ./backend/api/.env.docker
+    # env_file:
+    #   - ./backend/api/.env.docker
   api:
     container_name: api
     build: ./backend/api
@@ -17,8 +17,8 @@ services:
       - "9000:9000"
     expose: 
       - "9000"
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     depends_on:
       - db
   frontend:
