@@ -21,6 +21,7 @@ services:
       - .env
     depends_on:
       - db
+
   frontend:
     container_name: react
     build: ./frontend
@@ -31,23 +32,16 @@ services:
       - "${FRONTEND_PORT}"
     depends_on:
       - api
-      - chat
 
-  chat:
-    container_name: chat
-    build:
-      context: ./chat-service 
-      dockerfile: Dockerfile
+  messaging:
+    container_name: messaging
+    build: ./backend/messaging
     ports:
-      - '${CHAT_PORT}:${CHAT_PORT}'
-    restart: unless-stopped
+      - '${MSG_PORT}:${MSG_PORT}'
+    expose:
+      - "${MSG_PORT}"
+    restart: always
+    env_file:
+      - .env
     depends_on: 
-      - redis 
-    environment:
-      REDIS_HOST: redis
-      REDIS_PORT: "${REDIS_PORT}"    
-   
-  redis:
-    container_name: redis
-    image: "redis:latest"
-    restart: unless-stopped
+      - db   
