@@ -10,7 +10,6 @@ services:
   api:
     container_name: api
     image: registry.digitalocean.com/lend-a-hand/backend
-    # build: ./backend/api
     restart: always
     ports:
       - "9000:9000"
@@ -23,7 +22,6 @@ services:
   frontend:
     container_name: react
     image: registry.digitalocean.com/lend-a-hand/frontend
-    # build: ./frontend
     restart: always
     ports:
       - "3000:3000"
@@ -32,14 +30,10 @@ services:
     depends_on:
       - api
       - chat
-      - backend
 
   chat:
     container_name: chat
     image: registry.digitalocean.com/lend-a-hand/chat-service
-    # build:
-    #   context: ./chat-service
-    #   dockerfile: Dockerfile
     ports:
       - '8080:8080'
     restart: unless-stopped
@@ -64,7 +58,7 @@ services:
         - "8000:80"
         - "8001:81"
       depends_on:
-        - backend
+        - api
         - chat
         - frontend
 
