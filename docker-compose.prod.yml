@@ -17,7 +17,6 @@ services:
       - "9000"
     depends_on:
       - db
-      - frontend
 
   frontend:
     container_name: react
@@ -60,7 +59,6 @@ services:
       depends_on:
         - api
         - chat
-        - frontend
 
 volumes:
   postgres_data:
