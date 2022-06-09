@@ -18,6 +18,8 @@ services:
       - "9000"
     depends_on:
       - db
+      - frontend
+
   frontend:
     container_name: react
     image: registry.digitalocean.com/lend-a-hand/frontend
@@ -30,6 +32,7 @@ services:
     depends_on:
       - api
       - chat
+      - backend
 
   chat:
     container_name: chat
@@ -60,6 +63,10 @@ services:
       ports:
         - "8000:80"
         - "8001:81"
+      depends_on:
+        - backend
+        - chat
+        - frontend
 
 volumes:
   postgres_data:
