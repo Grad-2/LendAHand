@@ -27,14 +27,14 @@ impl Db {
         let db_name = dotenv::var("POSTGRES_DB");
 
         match (username, password, host, db_name) {
-            (Ok(un), Ok(pw), Ok(h), Ok(db)) => {     
+            (Ok(un), Ok(pw), Ok(h), Ok(db)) => {
                 Db::new(un, pw, h, db).await
             }
             (_, _, _, _) => {
                 warn!("Postgres DB environment variables not set. Defaulting to localhost/postgres");
                 Db::new("postgres".to_string(),
                         "postgres".to_string(),
-                        "127.0.0.1".to_string(),
+                        "0.0.0.0".to_string(),
                         "postgres".to_string()).await
             }
         }
@@ -151,11 +151,11 @@ impl Db {
                                 },
                                 (_, _) => {}
                             }
-                            
+
                         },
                         (_, _) => {}
                     }
-                     
+
                 }
             },
             None => {}
