@@ -21,9 +21,9 @@ impl Config {
                 }
             }
             (_, _) => {
-                warn!("Environment variables not set. Setting to default of 0.0.0.0:9000");
+                warn!("Environment variables not set. Setting to default of localhost:9000");
                 Config {
-                    host: "127.0.0.1".to_string(),
+                    host: "172.17.0.1".to_string(),
                     port: 9000,
                 }
             }
