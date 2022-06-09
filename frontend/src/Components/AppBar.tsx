@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import {Box, AppBar as Bar, Toolbar, Typography, Button, ButtonGroup} from '@mui/material'
 import { APPBAR, ROUTER_PATHS } from '../Constants';
 import { logState } from "../Types/types";
@@ -20,7 +20,7 @@ const AppBar = (props: AppBarProps) => {
 		console.log("App bar has rerendered.")
 	});
 
-	
+
 
 	const onClickLanding = () => {
 		navigation(ROUTER_PATHS.landing);
@@ -49,7 +49,7 @@ const AppBar = (props: AppBarProps) => {
 
 	const middleButtonSX = {
 		mr: 1,
-		ml: 0, 
+		ml: 0,
 		textTransform: 'none',
 		borderRadius: 28
 	}
@@ -90,7 +90,7 @@ const AppBar = (props: AppBarProps) => {
 					</Box>
 
 					<Box width={1} display='flex' justifyContent='right'>
-						{ props.userState.loggedIn && 
+						{ props.userState.loggedIn &&
 							<>
 								<Button sx={rightButtonsSX} size='medium' variant='contained' color='info' onClick = {onClickProfile}>
 									<Typography variant="subtitle1" color='white'>
@@ -114,7 +114,7 @@ const AppBar = (props: AppBarProps) => {
 					</Box>
 
 				</Toolbar>
-			</Bar>	
+			</Bar>
 		</Box>
 	);
 }

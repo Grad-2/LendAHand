@@ -65,3 +65,5 @@ services:
 volumes:
   postgres_data:
   redis_data:
+
+# Remember, do not take out the container garbage while trying to push more conatiners...
